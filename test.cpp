@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 int majority1(const vector<int>& A)
 {
     int N = A.size();
