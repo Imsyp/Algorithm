@@ -14,6 +14,12 @@ int sum(int n)
 
 int recursiveSum(int n)
 {
-    if(n == 1) return 1;
+    if(n == 1) return 1;    //base case
     return n + recursiveSum(n-1);
+}
+
+int main(void)
+{
+    cout<<sum(10)<<" "<<recursiveSum(10)<<endl;
+    return 0;
 }
