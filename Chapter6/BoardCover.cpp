@@ -102,8 +102,5 @@ int main(void)
         cout<<NumofCases(H, W, BlankBoard)<<endl;
     }
 
-
-
-
     return 0;
 }
