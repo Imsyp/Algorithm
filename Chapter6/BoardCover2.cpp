@@ -11,22 +11,10 @@ const int coverType[4][3][2] = {
   { { 0, 0 }, { 0, 1 }, { 1, 1 } },
   { { 0, 0 }, { 1, 0 }, { 1, 1 } },
   { { 0, 0 }, { 1, 0 }, { 1, -1 } }};
-  
-/***
-bool isFull(int H, int W, bool BlankBoard[20][20])
-{
-    for(int i=0; i<H; i++)
-        for(int j=0; j<W; j++)
-        {
-            if(BlankBoard[i][j] == true) false;
-        }
-    return true;
-}
-***/
 
 //type에 맞게 board를 채우거나 비운다(mode==1이면 덮고, mode ==-1이면 비움)
 //제대로 채워지지 않는 경우 false 반환(범위를 넘어가거나, 이미 채워진 경우)
-bool set(int y, int x, vector<vector<int>> board, int type, int mode)
+bool set(int y, int x, vector<vector<int>>& board, int type, int mode)
 {
     bool ok = true;
     for (int i = 0; i < 3; i++)
@@ -47,7 +35,7 @@ bool set(int y, int x, vector<vector<int>> board, int type, int mode)
 }
 
 //채울 수 있는 경우의 수 반환
-int NumofCases(vector<vector<int>> board)
+int NumofCases(vector<vector<int>>& board)
 {
     // 아직 채우지 못한 칸 중 가장 윗줄 왼쪽에 있는 칸을 찾는다
     int y = -1, x = -1;

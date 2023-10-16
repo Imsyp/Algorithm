@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include <cassert>
 #include <vector>
 
@@ -50,7 +50,7 @@ int countPairings(bool taken[10])
     int ret = 0;
     for(int pairWith = (firstFree+1); pairWith < n; pairWith++) //이미 짝을 찾은 학생의 경우를 skip하고 탐색
     {
-        if(taken[pairWith] && areFriends[firstFree][pairWith])
+        if(!taken[pairWith] && areFriends[firstFree][pairWith])
         {
             taken[firstFree] = taken[pairWith] = true;
             ret += countPairings(taken);
