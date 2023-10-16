@@ -11,7 +11,7 @@ const int coverType[4][3][2] = {
   { { 0, 0 }, { 0, 1 }, { 1, 1 } },
   { { 0, 0 }, { 1, 0 }, { 1, 1 } },
   { { 0, 0 }, { 1, 0 }, { 1, -1 } }};
-
+  
 /***
 bool isFull(int H, int W, bool BlankBoard[20][20])
 {
@@ -26,7 +26,7 @@ bool isFull(int H, int W, bool BlankBoard[20][20])
 
 //type에 맞게 board를 채우거나 비운다(mode==1이면 덮고, mode ==-1이면 비움)
 //제대로 채워지지 않는 경우 false 반환(범위를 넘어가거나, 이미 채워진 경우)
-bool set(int y, int x, vector<vector<int>> BlankBoard, int type, int mode)
+bool set(int y, int x, vector<vector<int>> board, int type, int mode)
 {
     bool ok = true;
     for (int i = 0; i < 3; i++)
@@ -34,11 +34,11 @@ bool set(int y, int x, vector<vector<int>> BlankBoard, int type, int mode)
         const int ny = y + coverType[type][i][0];
         const int nx = x + coverType[type][i][1];
 
-        if (ny < 0 || ny >= BlankBoard.size() || nx < 0 || nx >= BlankBoard[0].size()) // 범위 넘어가면
+        if (ny < 0 || ny >= board.size() || nx < 0 || nx >= board[0].size()) // 범위 넘어가면
         {
             ok = false;
         }
-        else if ((BlankBoard[ny][nx] += mode) > 1) // 이미 채워져 있으면
+        else if ((board[ny][nx] += mode) > 1) // 이미 채워져 있으면
         {
             ok = false;
         }
@@ -47,39 +47,34 @@ bool set(int y, int x, vector<vector<int>> BlankBoard, int type, int mode)
 }
 
 //채울 수 있는 경우의 수 반환
-int NumofCases(vector<vector<int>> BlankBoard)
+int NumofCases(vector<vector<int>> board)
 {
-    int y=-1;
-    int x=-1;
-
-    for(int i=0; i<BlankBoard.size(); i++)
+    // 아직 채우지 못한 칸 중 가장 윗줄 왼쪽에 있는 칸을 찾는다
+    int y = -1, x = -1;
+    for (int i = 0; i < board.size(); i++)
     {
-        for(int j=0; j<BlankBoard[0].size(); j++)
-        {
-            if(BlankBoard[i][j] == 0)    //최좌측상단 위치
+        for (int j = 0; j < board[i].size(); j++)
+            if (board[i][j] == 0)
             {
                 y = i;
                 x = j;
                 break;
             }
-        }
         if (y != -1)
             break;
     }
-
-    //base case: board가 꽉 차있으면 stop
+    // 기저 사례: 모든 칸을 채웠으면 1을 반환한다
     if (y == -1)
         return 1;
 
     int ret = 0;
-
     for (int type = 0; type < 4; type++)
     {
-        if (set(y, x, BlankBoard, type, 1));
-        {
-            ret += NumofCases(BlankBoard);
-        }
-        set(y, x, BlankBoard, type, -1);
+        // 만약 board[y][x] 을 type 형태로 덮을 수 있으면 재귀호출한다
+        if (set(y, x, board, type, 1))
+            ret += NumofCases(board);
+        // 덮었던 블록을 치운다
+        set(y, x, board, type, -1);
     }
     return ret;
 }
@@ -88,6 +83,8 @@ int main(void)
 {
     int cases;
     cin>>cases;
+
+
     for(int cc=0; cc<cases; cc++)
     {
         int H, W;
@@ -105,7 +102,6 @@ int main(void)
                     BlankBoard[a][b] = 1;
             }
         }
-
         int numCases = NumofCases(BlankBoard);
         cout << numCases << endl;
     }

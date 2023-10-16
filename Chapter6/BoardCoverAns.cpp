@@ -18,7 +18,7 @@ const int coverType[4][3][2] = {
 // delta = 1 이면 덮고, -1 이면 덮었던 블록을 없앤다.
 // 만약 블록이 제대로 덮이지 않은 경우 (게임판 밖으로 나가거나,
 // 겹치거나, 검은 칸을 덮을 때) false 를 반환한다.
-bool set(vector<vector<int> >& board, int y, int x, int type, int delta) {
+bool set(vector<vector<int>>& board, int y, int x, int type, int delta) {
   bool ok = true;
   for(int i = 0; i < 3; ++i) {
     const int ny = y + coverType[type][i][0];
