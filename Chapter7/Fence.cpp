@@ -50,6 +50,30 @@ int maxArea(const vector<int>& fence)
     return answer;
 }
 
+
+//답안에서 쉽게 푼 방법
+int bruteForce(const vector<int>& h)
+{
+    int ret = 0;
+    int N = h.size();
+
+    //가능한 모든 left, right 조합 순회
+    for(int left = 0; left < N; left++)
+    {
+        int minHeight = h[left];
+        for(int right = left; right < N; right++)
+        {
+            minHeight = min(minHeight, h[right]);
+            ret = max(ret, (right - left + 1) * minHeight);
+        }
+    }
+
+    return ret;
+}
+
+
+
+
 int main(void)
 {
     int cases;
@@ -68,7 +92,7 @@ int main(void)
             cin >> fence[i];
             assert(fence[i] <= 10000 && fence[i] >= 0);
         }
-        cout << maxArea(fence) << endl;
+        cout << bruteForce(fence) << endl;
     }
 
     return 0;
