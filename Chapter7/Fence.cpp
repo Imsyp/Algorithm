@@ -50,7 +50,6 @@ int maxArea(const vector<int>& fence)
     return answer;
 }
 
-
 //답안에서 쉽게 푼 방법
 int bruteForce(const vector<int>& h)
 {
@@ -70,9 +69,6 @@ int bruteForce(const vector<int>& h)
 
     return ret;
 }
-
-
-
 
 int main(void)
 {

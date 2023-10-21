@@ -7,7 +7,7 @@ using namespace std;
 string reverse(string::iterator& it)
 {
     char head = *it;
-    ++it;
+    it++;
     if(head == 'b' || head == 'w')
         return string(1, head);
     string upperLeft = reverse(it);
