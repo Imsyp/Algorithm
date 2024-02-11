@@ -46,9 +46,6 @@ int jumpGame(int y, int x, int n) {
 }
 
 int main(void) {
-
-
-
     int cases;
     cin >> cases;
     assert(cases <= 50);
@@ -71,7 +68,6 @@ int main(void) {
             }
         }
 
-
         if(jumpGame(0, 0, n) == 1) {
             cout<< "YES" << endl;
         }
@@ -79,6 +75,5 @@ int main(void) {
             cout<< "NO" << endl;
         }
     }
-
     return 0;
 }
